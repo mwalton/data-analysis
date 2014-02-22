@@ -1,0 +1,1 @@
+#Options File for datagraph appliation#-------------------------------datafilename: /Users/michaelwalton/workspace/data\-analysis/data\ graph\ listner/demo_data.csvgraphscript: /Users/michaelwalton/workspace/data\-analysis/data\ graph\ listner/demo_bargraph.Rcheckinterval: 2minquietduration: 2updatetype: All
