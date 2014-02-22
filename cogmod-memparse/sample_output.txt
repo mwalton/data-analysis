@@ -1,0 +1,110 @@
+Fixation1_V1:
+	Onset: 21 (1100ms)
+	Eccentricity: 0 [56 (2850ms)]
+	Eccentricity_zone: Fovea [56 (2850ms)]
+	Color: Black [56 (2850ms)]
+Stimulus1_V2:
+	Onset: 51 (2600ms)
+	Eccentricity: 1 [71 (3600ms)]
+	Eccentricity_zone: Fovea [71 (3600ms)]
+	Color: Blue [71 (3600ms)]
+	Shape: Circle [71 (3600ms)]
+Fixation2_V3:
+	Onset: 68 (3450ms)
+	Eccentricity: 0 [105 (5300ms)]
+	Eccentricity_zone: Fovea [105 (5300ms)]
+	Color: Black [105 (5300ms)]
+Stimulus2_V4:
+	Onset: 105 (5300ms)
+	Eccentricity: 1 [123 (6200ms)]
+	Eccentricity_zone: Fovea [123 (6200ms)]
+	Color: Blue [123 (6200ms)]
+	Shape: Circle [123 (6200ms)]
+Fixation3_V5:
+	Onset: 120 (6050ms)
+	Eccentricity: 0 [157 (7900ms)]
+	Eccentricity_zone: Fovea [157 (7900ms)]
+	Color: Black [157 (7900ms)]
+Stimulus3_V6:
+	Onset: 151 (7600ms)
+	Eccentricity: 1 [169 (8500ms)]
+	Eccentricity_zone: Fovea [169 (8500ms)]
+	Color: Blue [169 (8500ms)]
+	Shape: Circle [169 (8500ms)]
+Fixation4_V7:
+	Onset: 158 (7950ms)
+	Eccentricity: 0 [182 (9150ms)]
+	Eccentricity_zone: Fovea [182 (9150ms)]
+	Color: Black [182 (9150ms)]
+Stimulus4_V8:
+	Onset: 178 (8950ms)
+	Eccentricity: 2 [197 (9900ms)]
+	Eccentricity_zone: Periphery [197 (9900ms)]
+	Color: Red [197 (9900ms)]
+	Shape: Circle [197 (9900ms)]
+Fixation5_V9:
+	Onset: 190 (9550ms)
+	Eccentricity: 0 [210 (10550ms)]
+	Eccentricity_zone: Fovea [210 (10550ms)]
+	Color: Black [210 (10550ms)]
+Stimulus5_V10:
+	Onset: 210 (10550ms)
+	Eccentricity: 0 [229 (11500ms)]
+	Eccentricity_zone: Fovea [229 (11500ms)]
+	Color: Blue [229 (11500ms)]
+	Shape: Circle [229 (11500ms)]
+Fixation6_V11:
+	Onset: 216 (10850ms)
+	Eccentricity: 0 [241 (12100ms)]
+	Eccentricity_zone: Fovea [241 (12100ms)]
+	Color: Black [241 (12100ms)]
+Stimulus6_V12:
+	Onset: 236 (11850ms)
+	Eccentricity: 0 [258 (12950ms)]
+	Eccentricity_zone: Fovea [258 (12950ms)]
+	Color: Blue [258 (12950ms)]
+	Shape: Circle [258 (12950ms)]
+Fixation7_V13:
+	Onset: 244 (12250ms)
+	Eccentricity: 0 [268 (13450ms)]
+	Eccentricity_zone: Fovea [268 (13450ms)]
+	Color: Black [268 (13450ms)]
+Stimulus7_V14:
+	Onset: 255 (12800ms)
+	Eccentricity: 2 [277 (13900ms)]
+	Eccentricity_zone: Periphery [277 (13900ms)]
+	Color: Blue [277 (13900ms)]
+	Shape: Circle [277 (13900ms)]
+Fixation8_V15:
+	Onset: 264 (13250ms)
+	Eccentricity: 0 [284 (14250ms)]
+	Eccentricity_zone: Fovea [284 (14250ms)]
+	Color: Black [284 (14250ms)]
+Stimulus8_V16:
+	Onset: 270 (13550ms)
+	Eccentricity: 2 [292 (14650ms)]
+	Eccentricity_zone: Periphery [292 (14650ms)]
+	Color: Blue [292 (14650ms)]
+	Shape: Circle [292 (14650ms)]
+Fixation9_V17:
+	Onset: 283 (14200ms)
+	Eccentricity: 0 [300 (15050ms)]
+	Eccentricity_zone: Fovea [300 (15050ms)]
+	Color: Black [300 (15050ms)]
+Stimulus9_V18:
+	Onset: 285 (14300ms)
+	Eccentricity: 0 [307 (15400ms)]
+	Eccentricity_zone: Fovea [307 (15400ms)]
+	Color: Blue [307 (15400ms)]
+	Shape: Circle [307 (15400ms)]
+Fixation10_V19:
+	Onset: 300 (15050ms)
+	Eccentricity: 0 [312 (15650ms)]
+	Eccentricity_zone: Fovea [312 (15650ms)]
+	Color: Black [312 (15650ms)]
+Stimulus10_V20:
+	Onset: 307 (15400ms)
+	Eccentricity: 1 [312 (15650ms)]
+	Eccentricity_zone: Fovea [312 (15650ms)]
+	Color: Red [312 (15650ms)]
+	Shape: Circle [312 (15650ms)]
