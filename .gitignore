@@ -1,2 +1,10 @@
 *.csv
 *.pdf
+
+*.dylib
+
+*.plist
+
+data-graph/Data Graph.app/Contents/MacOS/Data Graph
+
+cogmod-memparse/

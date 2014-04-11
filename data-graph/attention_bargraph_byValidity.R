@@ -6,11 +6,14 @@ if (!require('plyr'))install.packages("plyr", repos="http://cran.stat.ucla.edu/"
 if (!require('psych'))install.packages("psych", repos="http://cran.stat.ucla.edu/", dependencies = TRUE)
 
 ########################################### LOAD AND PROCESS DATA
-
 #set working directory
-setwd("/Users/nogard/Dropbox/Documents/Delphi Projects/laptop_Programming/DataGraph/Builds - datagraph.rbvcp/Mac OS X (Intel)/files for DETECTION TASK folder")
+setwd("/Users/michaelwalton/workspace/data-analysis/data-graph")
+
 #load in some special functions
 source("helper_functions.R")
+
+#set working directory
+setwd("/Users/michaelwalton/workspace/endogenous-attn-task/Rules")
 
 #read in data file directly while creating this graph script
 alldata<-read.csv(file="data_output.csv",header=TRUE,sep=",")
@@ -26,9 +29,9 @@ alldata<-subset(alldata,ACCURACY=="CORRECT")
 
 #use the plyr package to summarize data
 #  without error bars
-#data.summary <- ddply(cbind(alldata["STIMLOC"],alldata["wRT"],alldata["RULES"]), c("STIMLOC","RULES"), summarise, meanRT=mean(wRT))
+#data.summary <- ddply(cbind(alldata["STIMCOLOR"],alldata["wRT"],alldata["RULES"]), c("STIMCOLOR","RULES"), summarise, meanRT=mean(wRT))
 #  with error bars
-data.summary <- summarySEwithin(data=alldata, measurevar="wRT", withinvars=c("STIMLOC","RULES"))
+data.summary <- summarySEwithin(data=alldata, measurevar="wRT", withinvars=c("CUEVALIDITY","RULES"))
 
 ########################################### CREATE GRAPH
 
@@ -42,11 +45,12 @@ my.theme<-theme_classic() + theme(axis.title.x = element_text(size=18), axis.tit
 #http://docs.ggplot2.org/current/
 
 N <- dim(alldata)[1]
-ggplot(data.summary, aes(fill=as.integer(STIMLOC), y=wRT, x=STIMLOC)) +
+ggplot(data.summary, aes(fill=CUEVALIDITY, y=wRT, x=CUEVALIDITY)) +
   geom_bar(position="dodge", stat="identity",colour="black") + #coord_cartesian(ylim = c(250, 450)) +
   geom_errorbar(aes(ymax = (wRT + se), ymin = (wRT - se)), width=0.25) +
-  my.theme + labs(y=paste('Mean ',modifier,'RT (ms)',sep=""), x='Stimulus Eccentricity (Deg)') + 
-  ggtitle(paste("Detection Task: RT By Stim Eccentricity (N=",N,")",sep="")) +
+  my.theme + labs(y=paste('Mean ',modifier,'RT (ms)',sep=""), x='Position Uncertainty') + 
+  ggtitle(paste("Posner Task: RT By Position Uncertainty (N=",N,")",sep="")) + 
+  scale_fill_manual(values=c("red","blue","green")) +
   facet_wrap(~ RULES) +
   theme(legend.position = "none") 
 
