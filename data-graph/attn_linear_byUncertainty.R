@@ -1,7 +1,3 @@
-#!/bin/bash
-
-R --no-save --no-restore --slave << "EOF"
-
 ############################################ SETUP R ENVIRONMENT
 
 #make sure we have access to some required packages
@@ -11,7 +7,7 @@ if (!require('psych'))install.packages("psych", repos="http://cran.stat.ucla.edu
 
 ########################################### LOAD AND PROCESS DATA
 #set working directory
-setwd("/Users/michaelwalton/workspace/data-analysis/data-graph/")
+setwd("/Users/michaelwalton/workspace/data-analysis/data-graph")
 
 #load in some special functions
 source("helper_functions.R")
@@ -20,7 +16,7 @@ source("helper_functions.R")
 setwd("/Users/michaelwalton/workspace/endogenous-attn-task/Rules")
 
 #read in data file directly while creating this graph script
-alldata<-read.csv(file="/Users/michaelwalton/workspace/endogenous-attn-task/Rules/data_output.csv",header=TRUE,sep=",")
+alldata<-read.csv(file="data_output.csv",header=TRUE,sep=",")
 
 #create a winsorized version of the RT variable
 #alldata$wRT<-winsor(alldata$RT,.05) ; modifier = "Winsorized " 
@@ -64,5 +60,3 @@ ggplot(data.summary, aes(group=ECCMAGNITUDE, colour=ECCMAGNITUDE, y=wRT, x=CUEVA
 
 
 
-
-ggsave(file = "/Users/michaelwalton/workspace/data-analysis/data-graph/output.pdf",height=8.,width=8.)
