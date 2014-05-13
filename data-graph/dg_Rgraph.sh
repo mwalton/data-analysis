@@ -37,6 +37,11 @@ alldata<-subset(alldata,ACCURACY=="CORRECT")
 #  with error bars
 data.summary <- summarySEwithin(data=alldata, measurevar="wRT", withinvars=c("ECCMAGNITUDE","CUEVALIDITY","RULES"))
 
+p1 <-data.frame("7 DVA","INVALID 20%","posner.prs",1,464,0,0,0,0)
+p2 <-data.frame("7 DVA","NEUTRAL 50%","posner.prs",1,445,0,0,0,0)
+p3 <-data.frame("7 DVA","VALID 80%","posner.prs",1,419,0,0,0,0)
+names(p1)<-names(data.summary);names(p2)<-names(p1);names(p3)<-names(p1)
+data.summary <- rbind(p1,p2,p3,data.summary)
 ########################################### CREATE GRAPH
 
 #some settings to make a pretty graph (not really required)
@@ -49,13 +54,13 @@ my.theme<-theme_classic() + theme(axis.title.x = element_text(size=18), axis.tit
 #http://docs.ggplot2.org/current/
 
 N <- dim(alldata)[1]
-ggplot(data.summary, aes(group=ECCMAGNITUDE, colour=ECCMAGNITUDE, y=wRT, x=CUEVALIDITY)) +
+ggplot(data.summary, aes(group=RULES, colour=RULES, y=wRT, x=CUEVALIDITY)) +
   geom_errorbar(aes(ymax = (wRT + se), ymin = (wRT - se)), width=0.25, position=position_dodge(.1)) +
   geom_line(position=position_dodge(.1)) +
   geom_point(position=position_dodge(.1)) +
   my.theme + labs(y=paste('Mean ',modifier,'RT (ms)',sep=""), x='Position Uncertainty') + 
   ggtitle(paste("Posner Task: RT By Position Uncertainty (N=",N,")",sep="")) + 
-  facet_wrap(~ RULES) +
+  facet_wrap(~ ECCMAGNITUDE) +
   theme(legend.position = "right") 
 
 

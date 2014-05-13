@@ -11,7 +11,7 @@ library(reshape2)
 setwd("/Users/michaelwalton/workspace/data-analysis/matrix-heatmap")
 #load in some special functions
 source("helper_functions.R")
-setwd("/Users/michaelwalton/workspace/exogenous-attn-task/Rules/")
+setwd("/Users/michaelwalton/workspace/endogenous-attn-task/Rules/")
 
 alldata <- read.csv("saliency.csv", header = FALSE, sep=",")
 
