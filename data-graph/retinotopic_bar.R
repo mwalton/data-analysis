@@ -29,7 +29,7 @@ alldata<-subset(alldata,ACCURACY=="CORRECT")
 
 data.summary <- summarySEwithin(data=alldata, measurevar="wRT", withinvars=c("TRIAL_TYPE","PROBE_DELAY"))
 l = dim(data.summary)[1]
-c = rep(400,l)
+c = rep(390,l)
 data.summary$wRT = c - data.summary$wRT
 ########################################### CREATE GRAPH
 
@@ -46,10 +46,10 @@ N <- dim(alldata)[1]
 ggplot(data.summary, aes(fill=TRIAL_TYPE, y=wRT, x=PROBE_DELAY)) +
   geom_bar(position="dodge", stat="identity",colour="black") + #coord_cartesian(ylim = c(250, 450)) +
   geom_errorbar(position = position_dodge(0.85),aes(ymax = (wRT + se), ymin = (wRT - se)), width=0.25) +
-  my.theme + labs(y=paste('Mean ',modifier,'RT (ms)',sep=""), x='Coordinate System') + 
-  ggtitle(paste("Retinotopic Task: RT By Probe Delay and Coordinate System (N=",N,")",sep="")) + 
-  scale_fill_manual(values=c("red","blue","green")) +
-  geom_hline(yintercept = 50) +
+  my.theme + labs(y=paste('RT ',modifier,'Difference (ms)',sep=""), x='Probe Delay (MS after saccade completion)') + 
+  ggtitle(paste("Attentional Facilitation by Probe Location (N=",N,")",sep="")) + 
+  #scale_fill_manual(values=c("firebrick2","dodgerblue2","chartreuse3")) +
+  geom_hline(yintercept = 10) +
 #   facet_wrap(~ RULES) +
   theme(legend.position = "right") 
 
