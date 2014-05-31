@@ -1,4 +1,4 @@
 data-analysis
 =============
 
-Statistical and data visualization tools in R, MatLab, and python
+Statistical analysis and data visualization tools (developed mainly for cogmodLab)
