@@ -27,7 +27,7 @@ alldata<-subset(alldata,ACCURACY=="CORRECT")
 
 ########################################### SUMMARIZE DATA
 
-data.summary <- summarySEwithin(data=alldata, measurevar="wRT", withinvars=c("TRIAL_TYPE","PROBE_DELAY"))
+data.summary <- summarySEwithin(data=alldata, measurevar="wRT", withinvars=c("TRIAL_TYPE","PROBE_DELAY", "RULES"))
 l = dim(data.summary)[1]
 c = rep(410,l)
 data.summary$wRT = c - data.summary$wRT
@@ -43,15 +43,15 @@ my.theme<-theme_classic() + theme(axis.title.x = element_text(size=18), axis.tit
 #http://docs.ggplot2.org/current/
 
 N <- dim(alldata)[1]
-ggplot(data.summary, aes(fill=TRIAL_TYPE, y=wRT, x=PROBE_DELAY)) +
-  geom_bar(position="dodge", stat="identity",colour="black") + #coord_cartesian(ylim = c(250, 450)) +
-  geom_errorbar(position = position_dodge(0.85),aes(ymax = (wRT + se), ymin = (wRT - se)), width=0.25) +
+
+ggplot(data.summary, aes(ymax = (wRT + se), ymin = (wRT - se),group=TRIAL_TYPE, colour=TRIAL_TYPE, y=wRT, x=PROBE_DELAY)) +
+  geom_errorbar(aes(ymax = (wRT + se), ymin = (wRT - se)), width=0.25, position=position_dodge(.1)) +
+  geom_line(position=position_dodge(.1)) +
+  geom_point(position=position_dodge(.1)) +
   my.theme + labs(y=paste('RT ',modifier,'Difference (ms)',sep=""), x='Probe Delay (MS after saccade completion)') + 
-  ggtitle(paste("  Attentional Facilitation by Probe Location (N=",N,")",sep="")) + 
-  #scale_fill_manual(values=c("firebrick2","dodgerblue2","chartreuse3")) +
-  #geom_hline(yintercept = 10) +
-#   facet_wrap(~ RULES) +
-  theme(legend.position = "right") 
+  ggtitle(paste("  Attentional Facilitation by Probe Location (N=",N,")",sep="")) +
+  theme(legend.position = "right")
+
 
 
 

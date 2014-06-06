@@ -17,10 +17,10 @@ setwd("/Users/michaelwalton/workspace/data-analysis/data-graph/")
 source("helper_functions.R")
 
 #set working directory
-setwd("/Users/michaelwalton/workspace/retinotopic-remapping/Rules")
+setwd("/Users/michaelwalton/workspace/endogenous-attn-task/Rules")
 
 #read in data file directly while creating this graph script
-alldata<-read.csv(file="/Users/michaelwalton/workspace/retinotopic-remapping/Rules/data_output.csv",header=TRUE,sep=",")
+alldata<-read.csv(file="/Users/michaelwalton/workspace/endogenous-attn-task/Rules/data_output.csv",header=TRUE,sep=",")
 
 #create a winsorized version of the RT variable
 #alldata$wRT<-winsor(alldata$RT,.05) ; modifier = "Winsorized " 
@@ -31,10 +31,17 @@ alldata<-subset(alldata,ACCURACY=="CORRECT")
 
 ########################################### SUMMARIZE DATA
 
-data.summary <- summarySEwithin(data=alldata, measurevar="wRT", withinvars=c("TRIAL_TYPE","PROBE_DELAY"))
-l = dim(data.summary)[1]
-c = rep(500,l)
-data.summary$wRT = c - data.summary$wRT
+#use the plyr package to summarize data
+#  without error bars
+#data.summary <- ddply(cbind(alldata["STIMCOLOR"],alldata["wRT"],alldata["RULES"]), c("STIMCOLOR","RULES"), summarise, meanRT=mean(wRT))
+#  with error bars
+data.summary <- summarySEwithin(data=alldata, measurevar="wRT", withinvars=c("ECCMAGNITUDE","CUEVALIDITY","RULES"))
+
+p1 <-data.frame("7 DVA","INVALID 20%","posner",1,470,0,0,0,0)
+p2 <-data.frame("7 DVA","NEUTRAL 50%","posner",1,440,0,0,0,0)
+p3 <-data.frame("7 DVA","VALID 80%","posner",1,410,0,0,0,0)
+names(p1)<-names(data.summary);names(p2)<-names(p1);names(p3)<-names(p1)
+data.summary <- rbind(p1,p2,p3,data.summary)
 ########################################### CREATE GRAPH
 
 #some settings to make a pretty graph (not really required)
@@ -47,16 +54,14 @@ my.theme<-theme_classic() + theme(axis.title.x = element_text(size=18), axis.tit
 #http://docs.ggplot2.org/current/
 
 N <- dim(alldata)[1]
-ggplot(data.summary, aes(fill=TRIAL_TYPE, y=wRT, x=PROBE_DELAY)) +
-  geom_bar(position="dodge", stat="identity",colour="black") + #coord_cartesian(ylim = c(250, 450)) +
-  geom_errorbar(position = position_dodge(0.85),aes(ymax = (wRT + se), ymin = (wRT - se)), width=0.25) +
-  my.theme + labs(y=paste('RT ',modifier,'Difference (ms)',sep=""), x='Probe Delay (MS after saccade completion)') + 
-  ggtitle(paste("Attentional Facilitation by Probe Location (N=",N,")",sep="")) + 
-  #scale_fill_manual(values=c("firebrick2","dodgerblue2","chartreuse3")) +
-  geom_hline(yintercept = 10) +
-#   facet_wrap(~ RULES) +
-  theme(legend.position = "right") 
-
+ggplot(data.summary, aes(group=RULES, colour=RULES, y=wRT, x=CUEVALIDITY)) +
+  geom_errorbar(aes(ymax = (wRT + se), ymin = (wRT - se)), width=0.25, position=position_dodge(.1)) +
+  geom_line(position=position_dodge(.1)) +
+  geom_point(position=position_dodge(.1)) +
+  my.theme + labs(y=paste('Mean ',modifier,'RT (ms)',sep=""), x='Position Uncertainty') + 
+  ggtitle(paste("Posner Task: RT By Position Uncertainty (N=",N,")",sep="")) + 
+  #facet_wrap(~ ) +
+  theme(legend.position = "right")
 
 
 

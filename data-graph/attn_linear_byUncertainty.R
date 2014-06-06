@@ -16,7 +16,7 @@ source("helper_functions.R")
 setwd("/Users/michaelwalton/workspace/endogenous-attn-task/Rules")
 
 #read in data file directly while creating this graph script
-alldata<-read.csv(file="data_output.csv",header=TRUE,sep=",")
+alldata<-read.csv(file="decentFit.csv",header=TRUE,sep=",")
 
 #create a winsorized version of the RT variable
 #alldata$wRT<-winsor(alldata$RT,.05) ; modifier = "Winsorized " 
@@ -33,11 +33,17 @@ alldata<-subset(alldata,ACCURACY=="CORRECT")
 #  with error bars
 data.summary <- summarySEwithin(data=alldata, measurevar="wRT", withinvars=c("ECCMAGNITUDE","CUEVALIDITY","RULES"))
 
-p1 <-data.frame("7 DVA","INVALID 20%","posner.prs",1,464,0,0,0,0)
-p2 <-data.frame("7 DVA","NEUTRAL 50%","posner.prs",1,445,0,0,0,0)
-p3 <-data.frame("7 DVA","VALID 80%","posner.prs",1,419,0,0,0,0)
+p1 <-data.frame("7 DVA","INVALID 20%","posner",1,455,0,0,0,0)
+p2 <-data.frame("7 DVA","NEUTRAL 50%","posner",1,440,0,0,0,0)
+p3 <-data.frame("7 DVA","VALID 80%","posner",1,425,0,0,0,0)
 names(p1)<-names(data.summary);names(p2)<-names(p1);names(p3)<-names(p1)
 data.summary <- rbind(p1,p2,p3,data.summary)
+
+posner = c(455, 440, 425)
+epic = c(493.31, 436.87, 401.29)
+R = cor(posner,epic)
+Rsq = R*R
+r2lbl <- paste("R^2 == ", round(Rsq,4))
 ########################################### CREATE GRAPH
 
 #some settings to make a pretty graph (not really required)
@@ -50,18 +56,12 @@ my.theme<-theme_classic() + theme(axis.title.x = element_text(size=18), axis.tit
 #http://docs.ggplot2.org/current/
 
 N <- dim(alldata)[1]
-ggplot(data.summary, aes(group=RULES, colour=RULES, y=wRT, x=CUEVALIDITY)) +
+ggplot(data.summary, aes(ymax = (wRT + se), ymin = (wRT - se - 100),group=RULES, colour=RULES, y=wRT, x=CUEVALIDITY)) +
   geom_errorbar(aes(ymax = (wRT + se), ymin = (wRT - se)), width=0.25, position=position_dodge(.1)) +
   geom_line(position=position_dodge(.1)) +
   geom_point(position=position_dodge(.1)) +
+  annotate("text", x = 2, y = 500, label = r2lbl, parse=TRUE) +
   my.theme + labs(y=paste('Mean ',modifier,'RT (ms)',sep=""), x='Position Uncertainty') + 
   ggtitle(paste("Posner Task: RT By Position Uncertainty (N=",N,")",sep="")) + 
-  facet_wrap(~ ECCMAGNITUDE) +
-  theme(legend.position = "right") 
-
-
-
-
-
-
-
+  #facet_wrap(~ ) +
+  theme(legend.position = "right")
